@@ -42,7 +42,15 @@ const Equipaciones = () => {
                 setError(data.error);
                 setProductos([]);
             } else {
-                setProductos(data);
+                // ✅ Convertir precios a número antes de guardar
+                const productosConvertidos = data.map((p: any) => ({
+                    ...p,
+                    precio: Number(p.precio),
+                    precio_oferta: Number(p.precio_oferta),
+                    stock: Number(p.stock)
+                }));
+
+                setProductos(productosConvertidos);
             }
         } catch (err) {
             setError('Error al cargar los productos');
@@ -52,6 +60,7 @@ const Equipaciones = () => {
             setLoading(false);
         }
     };
+
 
     if (loading) {
         return (
@@ -89,13 +98,7 @@ const Equipaciones = () => {
             {productos.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {productos.map((producto) => (
-                        <CardProducto
-                            key={producto.id}
-                            producto={{
-                                ...producto,
-                                categoria: 'EQUIPACIONES'
-                            }}
-                        />
+                        <CardProducto key={producto.id} producto={producto} />
                     ))}
                 </div>
             ) : (

@@ -5,6 +5,7 @@ import Team from "./pages/Team"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css'
 import Equipaciones from "./pages/Equipaciones";
+import ProductoDetalle from "./components/ProductoDetalle";
 
 const App = () => {
     return (
@@ -20,6 +21,8 @@ const App = () => {
                     <Route path="/equipaciones" element={<Equipaciones />} />
                     <Route path="/equipaciones/:idSubcategoria" element={<Equipaciones />} />
                     <Route path="/equipaciones/:idSubcategoria/:idSubsubcategoria" element={<Equipaciones />} />
+                    <Route path="/producto/:id" element={<ProductoDetalle />} />
+
                 </Routes>
 
                 <MainFooter />
