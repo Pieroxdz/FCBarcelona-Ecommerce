@@ -1,0 +1,1 @@
+export const API_URL = "https://pieroxdz.alwaysdata.net/WS_FCBARCELONA/"

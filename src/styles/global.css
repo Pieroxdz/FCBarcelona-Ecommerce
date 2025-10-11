@@ -1,0 +1,48 @@
+@import url('./fonts.css');
+
+:root {
+    --Color1: #666666;
+    --Color2: #888888;
+    --Color3: #222222;
+    --Color4: #2bb9a9;
+    --Color5: #1c3ce3;
+    --Color6: #ffab02;
+    --Color7: #ebebeb;
+    --white: #FFFFFF;
+    --black: #000000;
+    --fontPrimary: "Barlow Condensed", sans-serif;
+    --fontSecondary: "Futura Std", sans-serif
+}
+
+
+body {
+    font-family: var(--fontPrimary);
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit
+}
+
+
+p {
+    /* font-family: var(--fontSecondary); */
+    line-height: 26px;
+}
+
+/* h1 {}
+
+h2 {}
+
+h3 {} */
+
+
+.container-custom {
+    max-width: 1280px;
+    width: 90%;
+    margin-inline: auto;
+}

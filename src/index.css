@@ -1,0 +1,8 @@
+/* 1. Mis fuentes */
+@import url('./styles/fonts.css');
+
+/* 2. Mis estilos globales personalizados */
+@import url('./styles/global.css');
+
+/* 3. Tailwind FIRST - Importante en v4 */
+@import "tailwindcss";
