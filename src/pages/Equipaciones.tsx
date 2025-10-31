@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CardProducto from '../components/CardProducto';
 import type { Producto } from '../types/Producto';
+import { API_URL } from '../utils/index';
 
 const Equipaciones = () => {
     const { idSubcategoria, idSubsubcategoria } = useParams();
@@ -10,7 +11,6 @@ const Equipaciones = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const API_BASE = 'http://pieroxdz.alwaysdata.net/WS_FCBARCELONA';
     const CATEGORIA_EQUIPACIONES = 1;
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Equipaciones = () => {
             setLoading(true);
             setError(null);
 
-            let url = `${API_BASE}/productos_categoria.php?`;
+            let url = `${API_URL}productos_categoria.php?`;
 
             // Prioridad: sub-subcategoría > subcategoría > categoría
             if (idSubsubcategoria) {
@@ -42,7 +42,7 @@ const Equipaciones = () => {
                 setError(data.error);
                 setProductos([]);
             } else {
-                // ✅ Convertir precios a número antes de guardar
+                //  Convertir precios a número antes de guardar
                 const productosConvertidos = data.map((p: any) => ({
                     ...p,
                     precio: Number(p.precio),
@@ -60,7 +60,6 @@ const Equipaciones = () => {
             setLoading(false);
         }
     };
-
 
     if (loading) {
         return (
@@ -112,4 +111,4 @@ const Equipaciones = () => {
     );
 };
 
-export default Equipaciones;
+export default Equipaciones

@@ -14,9 +14,6 @@ const CardProducto = ({ producto }: CardProductoProps) => {
     const tieneDescuento =
         producto.precio_oferta !== null && producto.precio_oferta < producto.precio;
 
-    const porcentajeDescuento = tieneDescuento
-        ? Math.round(((producto.precio - producto.precio_oferta) / producto.precio) * 100)
-        : 0;
 
     // Construir texto de categorías (solo si vienen del backend)
     const categoriaTexto =
@@ -29,6 +26,7 @@ const CardProducto = ({ producto }: CardProductoProps) => {
                 .filter(Boolean)
                 .join(" › ")
             : null;
+
 
     return (
         <div

@@ -73,7 +73,6 @@ const mainLinks: MainLink[] = [
     { name: "BEST SELLERS", to: "/best-sellers", isDropdown: false },
     { name: "EQUIPACIONES", to: "/equipaciones", isDropdown: true, data: equipacionesMenuData },
     { name: "ENTRENAMIENTO", to: "/entrenamiento", isDropdown: false },
-    { name: "EQUIPACIONES", to: "/equipaciones", isDropdown: true, data: equipacionesMenuData },
     { name: "PLANTILLA", to: "/team", isDropdown: false },
     { name: "REGALOS Y ACCESORIOS", to: "/regalos-accesorios", isDropdown: false },
 ];
