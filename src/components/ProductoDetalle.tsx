@@ -104,12 +104,13 @@ export default function ProductoDetalle() {
         );
     }
 
-    // Calcular precio final
-    const precioFinal = producto.precio_oferta || producto.precio;
-    const tieneDescuento = producto.precio_oferta !== null;
+    // Calcular precio final con conversión segura
+    const precioFinal = Number(producto.precio_oferta || producto.precio || 0);
+    const tieneDescuento = !!producto.precio_oferta && producto.precio_oferta !== 0;
     const porcentajeDescuento = tieneDescuento
-        ? Math.round(((producto.precio - producto.precio_oferta) / producto.precio) * 100)
+        ? Math.round(((Number(producto.precio) - Number(producto.precio_oferta)) / Number(producto.precio)) * 100)
         : 0;
+
 
     return (
         <div className="min-h-screen bg-white">
