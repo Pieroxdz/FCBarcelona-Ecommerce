@@ -8,7 +8,7 @@ const Equipaciones = () => {
     const { idSubcategoria, idSubsubcategoria } = useParams();
 
     const [productos, setProductos] = useState<Producto[]>([]);
-    const [filasPagina, setFilasPagina] = useState(12);
+    const [filasPagina] = useState(12);
     const [numeroPagina, setNumeroPagina] = useState(1);
     const [totalFilas, setTotalFilas] = useState(0);
     const [totalPaginas, setTotalPaginas] = useState(0);
@@ -91,8 +91,8 @@ const Equipaciones = () => {
                     onClick={retroceder}
                     disabled={numeroPagina === 1}
                     className={`px-4 py-2 border rounded-lg font-medium transition-colors ${numeroPagina === 1
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-white border-gray-300 hover:bg-gray-900 hover:text-white'
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-white border-gray-300 hover:bg-gray-900 hover:text-white'
                         }`}
                 >
                     Retroceder
@@ -104,8 +104,8 @@ const Equipaciones = () => {
                         <button
                             key={paginaNum}
                             className={`w-10 h-10 rounded-lg font-semibold transition-colors ${isActive
-                                    ? 'bg-amber-300 text-gray-900'
-                                    : 'bg-white border border-gray-300 hover:bg-gray-100'
+                                ? 'bg-amber-300 text-gray-900'
+                                : 'bg-white border border-gray-300 hover:bg-gray-100'
                                 }`}
                             onClick={() => {
                                 setNumeroPagina(paginaNum);
@@ -120,8 +120,8 @@ const Equipaciones = () => {
                     onClick={avanzar}
                     disabled={numeroPagina === totalPaginas}
                     className={`px-4 py-2 border rounded-lg font-medium transition-colors ${numeroPagina === totalPaginas
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-white border-gray-300 hover:bg-gray-900 hover:text-white'
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-white border-gray-300 hover:bg-gray-900 hover:text-white'
                         }`}
                 >
                     Avanzar
