@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css'
 import Equipaciones from "./pages/Equipaciones";
 import ProductoDetalle from "./components/ProductoDetalle";
+import Carrito from "./pages/Carrito";
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/equipaciones/:idSubcategoria" element={<Equipaciones />} />
                     <Route path="/equipaciones/:idSubcategoria/:idSubsubcategoria" element={<Equipaciones />} />
                     <Route path="/producto/:id" element={<ProductoDetalle />} />
+                    <Route path="/carrito" element={<Carrito />} />
 
                 </Routes>
 

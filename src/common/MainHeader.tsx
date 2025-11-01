@@ -202,9 +202,9 @@ const MainHeader: React.FC = () => {
                             <a href="#" aria-label="Mi Cuenta">
                                 <i className="fa-solid fa-user text-white text-lg hover:text-yellow-500 transition duration-150"></i>
                             </a>
-                            <a href="#" aria-label="Mi Carrito" className="relative">
+                            <Link to="/carrito" aria-label="Mi Carrito" className="relative">
                                 <i className="fa-solid fa-cart-shopping text-white text-lg hover:text-yellow-500 transition duration-150"></i>
-                            </a>
+                            </Link>
 
                             <button
                                 className="md:hidden p-1 ml-2 text-xl"
