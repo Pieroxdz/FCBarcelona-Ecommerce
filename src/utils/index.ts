@@ -1,1 +1,1 @@
-export const API_URL = "https://pieroxdz.alwaysdata.net/WS_FCBARCELONA/"
+export const API_URL = "https://markin.alwaysdata.net/WS_FCBARCELONA/"

@@ -1,93 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo-simple-white.svg";
+import { useNavigation } from "../data/MainHeader"; // Importar el hook
+import type { MainLink, MainCategory, SubCategory } from "../data/MainHeader";
+import { useAuth } from "../AuthContext";
 
 // =================================================================
-// 1. INTERFACES DE TYPESCRIPT PARA LA ESTRUCTURA DEL MENÚ
-// =================================================================
-
-interface SubCategory {
-    name: string;
-    to: string;
-}
-
-interface MenuItem {
-    name: string;
-    to: string;
-    subcategories?: SubCategory[];
-}
-
-interface MainLink {
-    name: string;
-    to: string;
-    isDropdown: boolean;
-    data?: MenuItem[];
-}
-
-// =================================================================
-// 2. ESTRUCTURA DE DATOS
-// =================================================================
-
-const equipacionesMenuData: MenuItem[] = [
-    {
-        name: "PRIMERA EQUIPACIÓN",
-        to: "/equipaciones/1",
-        subcategories: [
-            { name: "HOMBRE", to: "/equipaciones/1/1" },
-            { name: "NIÑOS/AS Y BEBÉS", to: "/equipaciones/1/2" },
-            { name: "MUJER", to: "/equipaciones/1/3" }
-        ]
-    },
-    {
-        name: "SEGUNDA EQUIPACIÓN",
-        to: "/equipaciones/2",
-        subcategories: [
-            { name: "HOMBRE", to: "/equipaciones/2/4" },
-            { name: "NIÑOS/AS Y BEBÉS", to: "/equipaciones/2/5" },
-            { name: "MUJER", to: "/equipaciones/2/6" }
-        ]
-    },
-    {
-        name: "TERCERA EQUIPACIÓN",
-        to: "/equipaciones/3",
-        subcategories: [
-            { name: "HOMBRE", to: "/equipaciones/3/7" },
-            { name: "NIÑOS/AS Y BEBÉS", to: "/equipaciones/3/8" },
-            { name: "MUJER", to: "/equipaciones/3/9" }
-        ]
-    },
-    {
-        name: "EQUIPACIONES DE PORTERO",
-        to: "/equipaciones/4"
-    },
-    {
-        name: "OTROS DEPORTES",
-        to: "/equipaciones/5",
-        subcategories: [
-            { name: "BALONCESTO", to: "/equipaciones/5/10" }
-        ]
-    }
-];
-
-const mainLinks: MainLink[] = [
-    { name: "BEST SELLERS", to: "/best-sellers", isDropdown: false },
-    { name: "EQUIPACIONES", to: "/equipaciones", isDropdown: true, data: equipacionesMenuData },
-    { name: "ENTRENAMIENTO", to: "/entrenamiento", isDropdown: false },
-    { name: "PLANTILLA", to: "/team", isDropdown: false },
-    { name: "REGALOS Y ACCESORIOS", to: "/regalos-accesorios", isDropdown: false },
-];
-
-// =================================================================
-// 3. COMPONENTE RECURSIVO PARA EL MENÚ MÓVIL
+//  COMPONENTE RECURSIVO PARA EL MENÚ MÓVIL
 // =================================================================
 
 interface MobileDropdownItemProps {
-    item: MenuItem | SubCategory | MainLink;
+    item: MainCategory | SubCategory | MainLink;
     level?: number;
 }
 
 const MobileDropdownItem: React.FC<MobileDropdownItemProps> = ({ item, level = 0 }) => {
-    const menuItem = item as MenuItem;
+    const menuItem = item as MainCategory;
     const [isOpen, setIsOpen] = useState(false);
 
     if (!menuItem.subcategories || menuItem.subcategories.length === 0) {
@@ -123,11 +51,13 @@ const MobileDropdownItem: React.FC<MobileDropdownItemProps> = ({ item, level = 0
 };
 
 // =================================================================
-// 4. COMPONENTE PRINCIPAL
+// COMPONENTE PRINCIPAL
 // =================================================================
 
 const MainHeader: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { isAunthenticated } = useAuth();
+    const filteredLinks = useNavigation(); // Obtener links filtrados según autenticación
 
     return (
         <>
@@ -143,7 +73,7 @@ const MainHeader: React.FC = () => {
 
                         {/* NAVIGACIÓN DESKTOP */}
                         <ul className="hidden md:flex items-center gap-6 lg:gap-8">
-                            {mainLinks.map((link, index) => (
+                            {filteredLinks.map((link, index) => (
                                 <li key={index} className="relative group h-full flex items-center">
                                     <Link to={link.to} className="block py-2 text-sm uppercase tracking-wide font-medium hover:text-yellow-400 transition-colors duration-200">
                                         {link.name}
@@ -199,9 +129,10 @@ const MainHeader: React.FC = () => {
 
                         {/* ÍCONOS Y HAMBURGUESA */}
                         <div className="flex items-center gap-4">
-                            <a href="#" aria-label="Mi Cuenta">
+                            <Link to={isAunthenticated ? "/perfil" : "/login"} aria-label="Mi Cuenta">
                                 <i className="fa-solid fa-user text-white text-lg hover:text-yellow-500 transition duration-150"></i>
-                            </a>
+                            </Link>
+
                             <Link to="/carrito" aria-label="Mi Carrito" className="relative">
                                 <i className="fa-solid fa-cart-shopping text-white text-lg hover:text-yellow-500 transition duration-150"></i>
                             </Link>
@@ -223,7 +154,7 @@ const MainHeader: React.FC = () => {
                 >
                     <div className="px-6 py-4">
                         <ul className="flex flex-col divide-y divide-white/10 text-white font-semibold">
-                            {mainLinks.map((link, index) => (
+                            {filteredLinks.map((link, index) => (
                                 <React.Fragment key={index}>
                                     {link.isDropdown && link.data ? (
                                         <MobileDropdownItem
