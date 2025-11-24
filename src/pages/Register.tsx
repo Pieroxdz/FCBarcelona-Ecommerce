@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import barcaLogo from './assets/barca-logo.svg';
 import BarcaLogo from '../assets/BarcaLogo';
 import { Link } from 'react-router-dom';
 
