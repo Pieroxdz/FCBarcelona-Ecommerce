@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import Perfil from "./pages/Perfil";
+import { Socios } from "./pages/Socios";
 
 const App = () => {
     return (
@@ -32,6 +33,7 @@ const App = () => {
 
                     <Route element={<PrivateRoute />}>
                         <Route path='/team' element={<Team />} />
+                        <Route path='/socios' element={<Socios />} />
                     </Route>
                 </Routes>
 

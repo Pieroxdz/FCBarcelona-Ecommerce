@@ -253,6 +253,11 @@ export const mainLinks: MainLink[] = [
         to: "/regalos-accesorios", 
         isDropdown: true, 
         data: regalosAccesoriosData 
+    },
+    { 
+        name: "SOCIOS", 
+        to: "/socios", 
+        isDropdown: false, 
     }
 ];
 
@@ -272,7 +277,7 @@ export const useNavigation = () => {
         }
         
         // Si NO está autenticado, ocultar PLANTILLA y BEST SELLERS
-        return item.name !== "PLANTILLA" && item.name !== "BEST SELLERS";
+        return item.name !== "PLANTILLA" && item.name !== "BEST SELLERS" && item.name !== "SOCIOS";
     });
 };
 
