@@ -14,14 +14,14 @@ interface SubSubCategory {
 interface SubCategory {
     name: string;
     to: string;
-    subcategories?: SubSubCategory[]; // ⚠️ Cambiado a "subcategories" minúscula
+    subcategories?: SubSubCategory[]; 
 }
 
 // Nivel 1: Categoría principal (madres) - PUEDE tener subcategorías
 interface MainCategory {
     name: string;
     to: string;
-    subcategories?: SubCategory[]; // ⚠️ Cambiado a "subcategories" minúscula
+    subcategories?: SubCategory[];
 }
 
 // Nivel 0: Links principales del menú
@@ -29,14 +29,14 @@ interface MainLink {
     name: string;
     to: string;
     isDropdown: boolean;
-    data?: MainCategory[]; // ⚠️ Cambiado a "data"
+    data?: MainCategory[]; 
 }
 
 // =================================================================
 // 2. DATOS COMPLETOS DEL MENÚ
 // =================================================================
 
-// 🔵 EQUIPACIONES
+
 const equipacionesData: MainCategory[] = [
     {
         name: "PRIMERA EQUIPACIÓN",
@@ -78,7 +78,7 @@ const equipacionesData: MainCategory[] = [
     }
 ];
 
-// 🔵 ENTRENAMIENTO
+
 const entrenamientoData: MainCategory[] = [
     {
         name: "HOMBRE",
@@ -112,7 +112,7 @@ const entrenamientoData: MainCategory[] = [
     }
 ];
 
-// 🟣 MODA
+
 const modaData: MainCategory[] = [
     {
         name: "HOMBRE",
@@ -162,14 +162,14 @@ const modaData: MainCategory[] = [
     }
 ];
 
-// 🟡 MEMORABILIA
+
 const memorabiliaData: MainCategory[] = [
     { name: "Stadium Memorabilia", to: "/memorabilia/stadium" },
     { name: "Memorabilia Firmado", to: "/memorabilia/firmado" },
     { name: "Joyas con Diamantes", to: "/memorabilia/joyas-diamantes" }
 ];
 
-// 🎁 REGALOS Y ACCESORIOS
+
 const regalosAccesoriosData: MainCategory[] = [
     {
         name: "ACCESORIOS",

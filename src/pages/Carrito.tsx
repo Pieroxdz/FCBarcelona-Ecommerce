@@ -125,7 +125,7 @@ export default function Carrito() {
             <div className="max-w-7xl mx-auto px-4">
                 {/* Título */}
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 uppercase tracking-wide">
-                    Shopping Cart
+                    Carrito de compras
                 </h1>
 
                 {items.length === 0 ? (

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Player } from "../types/Player";
 import PlayerCard from "../common/PlayerCard";
+import BarcelonaLoader from "../components/BarcelonaLoader"; 
+
 
 const Team = () => {
 
@@ -12,7 +14,7 @@ const Team = () => {
     }, []);
 
     const leerServicio = () => {
-        fetch("https://pieroxdz.alwaysdata.net/WS_FCBARCELONA/jugadores.php")
+        fetch("https://markin.alwaysdata.net/WS_FCBARCELONA/jugadores.php")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,18 +33,18 @@ const Team = () => {
             });
     };
 
-    if (loading) {
-        return (
-            <section id="jugadores" className="py-20">
-                <div className="jugadores-wrapper">
-                    <h1 className="text-3xl font-bold text-center mb-8">Jugadores</h1>
-                    <div className="flex justify-center items-center min-h-[400px]">
-                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
+if (loading) {
+    return (
+        <section id="jugadores" className="py-20 bg-gray-50">
+            <div className="jugadores-wrapper max-w-7xl mx-auto px-4">
+                <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+                    Jugadores FC Barcelona
+                </h1>
+                <BarcelonaLoader />
+            </div>
+        </section>
+    );
+}
 
     return (
         <>

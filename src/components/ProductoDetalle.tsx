@@ -21,14 +21,23 @@ export default function ProductoDetalle() {
             setLoading(true);
 
             const response = await fetch(
-                `https://pieroxdz.alwaysdata.net/WS_FCBARCELONA/producto_detalle.php?id=${idProducto}`
+                `https://markin.alwaysdata.net/WS_FCBARCELONA/producto_detalle.php?id=${idProducto}`
             );
             const data = await response.json();
 
             if (data.error) {
                 setError(data.error);
             } else {
-                setProducto(data);
+                // Asegurar conversión de tipos numéricos
+                const productoConvertido = {
+                    ...data,
+                    precio: parseFloat(data.precio) || 0,
+                    precio_oferta: data.precio_oferta ? parseFloat(data.precio_oferta) : null,
+                    stock: parseInt(data.stock) || 0,
+                    id: parseInt(data.id) || 0,
+                    activo: parseInt(data.activo) || 0
+                };
+                setProducto(productoConvertido);
             }
             setLoading(false);
         } catch (error) {
@@ -104,13 +113,18 @@ export default function ProductoDetalle() {
         );
     }
 
-    // Calcular precio final con conversión segura
-    const precioFinal = Number(producto.precio_oferta || producto.precio || 0);
-    const tieneDescuento = !!producto.precio_oferta && producto.precio_oferta !== 0;
-    const porcentajeDescuento = tieneDescuento
-        ? Math.round(((Number(producto.precio) - Number(producto.precio_oferta)) / Number(producto.precio)) * 100)
-        : 0;
+    // Validar y convertir precios de forma segura
+    const precioBase = typeof producto.precio === 'number' ? producto.precio : parseFloat(String(producto.precio)) || 0;
+    const precioOfertaValue = producto.precio_oferta 
+        ? (typeof producto.precio_oferta === 'number' ? producto.precio_oferta : parseFloat(String(producto.precio_oferta)) || 0)
+        : null;
 
+    const tieneDescuento = precioOfertaValue !== null && precioOfertaValue > 0 && precioOfertaValue < precioBase;
+    const precioFinal = tieneDescuento && precioOfertaValue ? precioOfertaValue : precioBase;
+    
+    const porcentajeDescuento = tieneDescuento && precioOfertaValue
+        ? Math.round(((precioBase - precioOfertaValue) / precioBase) * 100)
+        : 0;
 
     return (
         <div className="min-h-screen bg-white">
@@ -138,7 +152,7 @@ export default function ProductoDetalle() {
                             )}
 
                             {/* Badge sin stock */}
-                            {producto.stock === 0 && (
+                            {!tieneDescuento && producto.stock === 0 && (
                                 <div className="absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded text-sm font-semibold z-10">
                                     <i className="fas fa-times-circle mr-1"></i>
                                     Agotado
@@ -189,18 +203,18 @@ export default function ProductoDetalle() {
 
                             {/* Precios */}
                             <div className="flex items-baseline gap-3 mb-6">
-                                {tieneDescuento ? (
+                                {tieneDescuento && precioOfertaValue ? (
                                     <>
                                         <span className="text-4xl font-bold text-red-600">
-                                            ${precioFinal.toFixed(2)}
+                                            S/ {precioFinal.toFixed(2)}
                                         </span>
                                         <span className="text-2xl text-gray-400 line-through">
-                                            ${Number(producto.precio).toFixed(2)}
+                                            S/ {precioBase.toFixed(2)}
                                         </span>
                                     </>
                                 ) : (
                                     <span className="text-4xl font-bold text-gray-900">
-                                        ${Number(producto.precio).toFixed(2)}
+                                        S/ {precioBase.toFixed(2)}
                                     </span>
                                 )}
                             </div>

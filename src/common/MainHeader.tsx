@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo-simple-white.svg";
-import { useNavigation } from "../data/MainHeader"; // Importar el hook
+import { useNavigation } from "../data/MainHeader";
 import type { MainLink, MainCategory, SubCategory } from "../data/MainHeader";
 import { useAuth } from "../AuthContext";
 
@@ -57,7 +57,7 @@ const MobileDropdownItem: React.FC<MobileDropdownItemProps> = ({ item, level = 0
 const MainHeader: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isAunthenticated } = useAuth();
-    const filteredLinks = useNavigation(); // Obtener links filtrados según autenticación
+    const filteredLinks = useNavigation();
 
     return (
         <>

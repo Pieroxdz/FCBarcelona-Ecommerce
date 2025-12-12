@@ -36,7 +36,6 @@ const App = () => {
                         <Route path='/socios' element={<Socios />} />
                     </Route>
                 </Routes>
-
                 <MainFooter />
             </BrowserRouter>
         </>
